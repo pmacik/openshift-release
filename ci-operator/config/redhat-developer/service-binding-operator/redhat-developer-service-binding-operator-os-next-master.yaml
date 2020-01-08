@@ -1,0 +1,30 @@
+
+base_images:
+  os:
+    name: ubi
+    namespace: ocp
+    tag: '7'
+
+resources:
+  '*':
+    limits:
+      memory: 6Gi
+    requests:
+      memory: 250Mi
+      cpu: 100m
+
+binary_build_commands: make build
+
+build_root:
+  project_image:
+    dockerfile_path: openshift-ci/Dockerfile.tools
+
+tag_specification:
+  name: '4.4'
+  namespace: ocp
+
+tests:
+- as: e2e-os-next
+  commands: VERBOSE=2 LOGS_DIR=/tmp/artifacts make -k test-e2e parse-test-e2e-operator-log
+  openshift_installer_src:
+    cluster_profile: aws
