@@ -26,7 +26,7 @@ tests:
       credentials:
       - mount_path: /usr/local/quay.credentials
         name: redhat-developer-services-binding-operator-test-quay-credentials
-        namespace: ocpappsvc-secrets
+        namespace: test-credentials
       from: src
       resources:
         requests:
